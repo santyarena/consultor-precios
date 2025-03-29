@@ -1,18 +1,16 @@
 from flask import Flask, request, jsonify
 
-app = Flask(__name__)  # ESTA LÍNEA ES CLAVE
-
-@app.route("/")
-def home():
-    return "¡API funcionando!"
+app = Flask(__name__)
 
 @app.route("/consultar", methods=["POST"])
-def consultar_precio():
+def consultar():
     data = request.get_json()
-    producto = data.get("producto", "")
-    
-    # Por ahora simulemos la respuesta:
+    producto = data.get("producto", "Desconocido")
     return jsonify({
         "producto": producto,
-        "precio": "$174.899"
+        "precio": "$123456"  # Simulado por ahora
     })
+
+if __name__ == "__main__":
+    app.run(debug=False, host="0.0.0.0", port=3000)
+
